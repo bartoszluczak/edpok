@@ -18,6 +18,7 @@
 </script>
 
 <div class="app">
+	<div class="gradient" />
 	<Header />
 
 	<main>
@@ -25,7 +26,7 @@
 	</main>
 
 	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		<p>Created and copyright by Bartosz Łuczak | {new Date().getFullYear()}</p>
 	</footer>
 </div>
 
@@ -34,6 +35,17 @@
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
+	}
+	.gradient {
+		width: 100%;
+		height: 180%;
+		display: flex;
+		background: rgb(76, 76, 114);
+		background: radial-gradient(circle, rgba(76, 76, 114, 1) 5%, rgba(76, 76, 114, 0) 65%);
+		position: absolute;
+		z-index: -23;
+		top: -101%;
+		opacity: 0.5;
 	}
 
 	main {
@@ -52,11 +64,17 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		padding: 12px;
+		padding: 0.5rem;
 	}
 
 	footer a {
 		font-weight: bold;
+	}
+
+	footer p {
+		font-size: 0.75rem;
+		padding: 0;
+		margin: 0;
 	}
 
 	@media (min-width: 480px) {
