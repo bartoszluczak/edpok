@@ -17,6 +17,9 @@ dependencies:
   '@vercel/postgres-kysely':
     specifier: ^0.6.0
     version: 0.6.0(kysely@0.26.3)
+  '@vercel/speed-insights':
+    specifier: ^1.0.2
+    version: 1.0.2
   dompurify:
     specifier: ^3.0.6
     version: 3.0.6
@@ -950,6 +953,11 @@ packages:
       bufferutil: 4.0.8
       utf-8-validate: 6.0.3
       ws: 8.14.2(bufferutil@4.0.8)(utf-8-validate@6.0.3)
+    dev: false
+
+  /@vercel/speed-insights@1.0.2:
+    resolution: {integrity: sha512-y5HWeB6RmlyVYxJAMrjiDEz8qAIy2cit0fhBq+MD78WaUwQvuBnQlX4+5MuwVTWi46bV3klaRMq83u9zUy1KOg==}
+    requiresBuild: true
     dev: false
 
   /abab@2.0.6:

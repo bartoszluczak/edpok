@@ -8,6 +8,7 @@
 	import { inject } from '@vercel/analytics';
 
 	inject({ mode: dev ? 'development' : 'production' });
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 
 	/** @type {import('./$types').LayoutServerData} */
 	export let data;
@@ -19,6 +20,7 @@
 			analyticsId: data.analyticsId
 		});
 	}
+	injectSpeedInsights();
 </script>
 
 <div class="app">
