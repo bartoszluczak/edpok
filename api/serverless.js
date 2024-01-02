@@ -1,8 +1,16 @@
 import { sql } from '@vercel/postgres';
 import OpenAI from 'openai';
 import 'dotenv/config';
-import { put } from '@vercel/blob';
 import crypto from 'crypto';
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+
+const client = new S3Client({
+	region: 'eu-central-1',
+	credentials: {
+		accessKeyId: process.env.accessKeyId,
+		secretAccessKey: process.env.secretAccessKey
+	}
+});
 
 export default async function handler(request, response) {
 	try {
@@ -61,16 +69,24 @@ export default async function handler(request, response) {
 		console.log(resp.data[0].url);
 
 		const fetchResponse = await fetch(resp.data[0].url);
-		const fetchBlob = await fetchResponse.blob();
-		const blob = await put(`./${articleId}.jpg`, fetchBlob, {
-			access: 'public'
+		const fetchBlob = await fetchResponse.arrayBuffer();
+		// const fetchBlob = await fetchResponse.blob();
+
+		const blob = await new PutObjectCommand({
+			Bucket: 'articles-imgs',
+			Key: `${articleId}.jpg`,
+			Body: fetchBlob
 		});
+		const imgResponse = await client.send(blob);
+		console.log(imgResponse['$metadata']);
 
-		const articleImageUrl = blob.url;
+		if (imgResponse['$metadata'].httpStatusCode !== 200) return;
 
-		// const arrayBuffer = await fetchBlob.arrayBuffer();
-		// const buffer = Buffer.from(arrayBuffer);
-		// await fs.writeFile('./saturn.png', buffer);
+		// const blob = await put(`./${articleId}.jpg`, fetchBlob, {
+		// 	access: 'public'
+		// });
+
+		const articleImageUrl = `https://articles-imgs.s3.eu-central-1.amazonaws.com/${articleId}.jpg`;
 
 		// 	Update DB
 		await sql`INSERT INTO fullstackarticles (id, created_at, title, content, image) VALUES (${articleId}, ${createdAt}, ${articleTitle}, ${articleContent}, ${articleImageUrl})`;
