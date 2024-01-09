@@ -110,9 +110,35 @@
 		color: rgba(255, 255, 255, 0.9);
 	}
 
+	@media (max-width: 966px) {
+		section {
+			flex-wrap: wrap !important;
+		}
+
+		.articleContainer {
+			order: 1;
+		}
+
+		.historyDatesContainer {
+			order: 2;
+			width: 80vw !important;
+			border: 1px solid rgba(248, 248, 255, 0.3) !important;
+			border-radius: 1rem !important;
+			padding: 1rem !important;
+			backdrop-filter: blur(5rem);
+			background: rgb(255, 255, 255) !important;
+			background: linear-gradient(
+				180deg,
+				rgba(255, 255, 255, 0.1) 0%,
+				rgba(255, 255, 255, 0) 100%
+			) !important;
+		}
+	}
+
 	section {
 		display: flex;
 		flex-direction: row;
+		flex-wrap: nowrap;
 		justify-content: center;
 		flex: 0.6;
 		height: 100%;
@@ -170,7 +196,6 @@
 
 	.articleImage {
 		display: flex;
-		height: 512px;
 		overflow: hidden;
 		align-items: center;
 		justify-content: center;

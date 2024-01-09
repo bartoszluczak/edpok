@@ -14,7 +14,7 @@
 	}
 
 	header h1 {
-		padding-bottom: 0;
+		padding: 0 1rem;
 		margin-bottom: 0;
 	}
 
