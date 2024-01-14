@@ -14,7 +14,7 @@ const client = new S3Client({
 
 export default async function handler(request, response) {
 	try {
-		const openai = new OpenAI({ apiKey: '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' });
+		const openai = new OpenAI({ apiKey: process.env.apiKey });
 		const { rows } = await sql`SELECT title from fullstackarticles LIMIT 30`;
 
 		const articleList = rows.map((item) => item.title);
