@@ -3,8 +3,7 @@
 import { sql } from '@vercel/postgres';
 
 export async function load() {
-	const { rows } =
-		await sql`SELECT id, created_at, title, content, image from fullstackarticles LIMIT 30`;
+	const { rows } = await sql`SELECT id, created_at, title, content, image from fullstackarticles`;
 
 	return {
 		articles: rows
